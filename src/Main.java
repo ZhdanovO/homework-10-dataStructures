@@ -5,26 +5,22 @@ import java.util.LinkedList;
 public class Main {
     public static void main(String[] args) {
 
+        //Создание ArrayList
         ArrayList<String> strings = new ArrayList<>();
         strings.add("Привет");
         strings.add("меня");
         strings.add("зовут");
         strings.add("массив");
 
-        long startTime1 = System.currentTimeMillis();
-
-        for (int i = 0; i < 1000000; i++) {
-            strings.add(i, "не");
+        //поиск по индексу
+        System.out.println(strings.get(2));
+        //поиск по значению
+        if (strings.indexOf("массив") != -1){
+            System.out.println("В нашем списочном массиве присутствует элемент со значением \"массив\". Его индекс " + strings.indexOf("массив"));
         }
+        //удаление
+        strings.remove(1);
 
-        long finishTime1 = System.currentTimeMillis();
-        long duration =  finishTime1 - startTime1;
-
-//        for (String str : strings) {
-//            System.out.println(str);
-//        }
-
-        System.out.println("Время выполнения добавления миллиона элементов в ArrayList = " + duration + " миллисекунд");
 
         LinkedList<String> linkedStrings = new LinkedList<>();
         linkedStrings.add("Привет");
@@ -32,17 +28,38 @@ public class Main {
         linkedStrings.add("зовут");
         linkedStrings.add("массив");
 
-        long startTime2 = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
-            linkedStrings.add(i, "не");
+        //поиск по значению
+        System.out.println(linkedStrings.indexOf("меня"));
+        //поиск по индексу
+        System.out.println(linkedStrings.get(0));
+        //удаление
+        linkedStrings.remove(1);
+
+
+
+
+        //Вызов своей реализации ArrayList
+        CustomArrayList<String> customArrayList = new CustomArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            customArrayList.add(String.valueOf(i));
         }
-        long finishTime2 = System.currentTimeMillis();
-        long duration2 =  finishTime2 - startTime2;
-        System.out.println("Время выполнения добавления миллиона элементов в LinkedList = " + duration2 + " миллисекунд");
+        for (int i = 0; i < customArrayList.size(); i++) {
+            System.out.print(customArrayList.get(i) + ", ");
+        }
+        System.out.println();
+        //Удалим элемент
+        customArrayList.remove(3);
+        for (int i = 0; i < customArrayList.size(); i++) {
+            System.out.print(customArrayList.get(i) + ", ");
+        }
+        System.out.println();
 
-//        for (String str : linkedStrings) {
-//            System.out.println(str);
-//        }
 
+        //Определяем время выполнения миллиона операций добавления элементов
+        SpeedTest speedTest = new SpeedTest();
+        System.out.println(speedTest.ArrayListAddSpeed(1000000));
+        System.out.println(speedTest.LinkedListAddSpeed(1000000));
+        //моя реализация значительно LinkedList (порядка 100 раз) медленнее(
+        System.out.println(speedTest.CustomArrayListAddSpeed(10000));
     }
 }
