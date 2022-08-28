@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Main {
@@ -54,12 +53,33 @@ public class Main {
         }
         System.out.println();
 
+        //работа со своей реализацией LinkedList
+        CustomLinkedList<String> customLinkedList = new CustomLinkedList<>();
+        for (int i = 0; i < 10; i++) {
+            customLinkedList.add(String.valueOf(i));
+        }
+        for (int i = 0; i < customLinkedList.size(); i++) {
+            System.out.print(customLinkedList.get(i) + ", ");
+        }
+        System.out.println();
+        customLinkedList.remove(4);
+        for (int i = 0; i < customLinkedList.size(); i++) {
+            System.out.print(customLinkedList.get(i) + ", ");
+        }
+        System.out.println();
+        customLinkedList.add("Hello", 2);
+        for (int i = 0; i < customLinkedList.size(); i++) {
+            System.out.print(customLinkedList.get(i) + ", ");
+        }
+        System.out.println();
+
 
         //Определяем время выполнения миллиона операций добавления элементов
         SpeedTest speedTest = new SpeedTest();
         System.out.println(speedTest.ArrayListAddSpeed(1000000));
         System.out.println(speedTest.LinkedListAddSpeed(1000000));
-        //моя реализация значительно LinkedList (порядка 100 раз) медленнее(
+        //моя реализация значительно (примерно на 2 порядка) медленнее(
         System.out.println(speedTest.CustomArrayListAddSpeed(10000));
+        System.out.println(speedTest.CustomLinkedListAddSpeed(10000));
     }
 }

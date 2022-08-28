@@ -36,4 +36,15 @@ public class SpeedTest {
         long duration =  finishTime - startTime;
         return "Время выполнения добавления " + iterations + " элементов в CustomArrayList = " + duration + " миллисекунд";
     }
+
+    public  String CustomLinkedListAddSpeed(int iterations) {
+        CustomLinkedList<String> strings = new CustomLinkedList();
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < iterations; i++) {
+            strings.add("-");
+        }
+        long finishTime = System.currentTimeMillis();
+        long duration =  finishTime - startTime;
+        return "Время выполнения добавления " + iterations + " элементов в CustomLinkedList = " + duration + " миллисекунд";
+    }
 }
